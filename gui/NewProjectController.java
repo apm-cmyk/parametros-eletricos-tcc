@@ -397,9 +397,19 @@ public class NewProjectController implements Initializable {
 			Circle faseFImagem = new Circle();
 			Circle ParaRaio2 = new Circle();
 
+			double escala = 100;
+			double div1 = 3;
+			double div2 = 4;
+			faseAx = (faseAx/div1)*100;
+			faseBx = (faseBx/div1)*100;
+			faseCx = (faseCx/div1)*100;
+			faseAy = (faseAy/div2)*100;
+			faseBy = (faseBy/div2)*100;
+			faseCy = (faseCy/div2)*100;
 			
+			paraRaioX = (paraRaioX/div1)*100;
+			paraRaioY = (paraRaioY/div2)*100;
 			
-
 			//Zoom nos Circle
 			faseA.getTransforms().add(zoom);
 			faseB.getTransforms().add(zoom);
@@ -429,7 +439,7 @@ public class NewProjectController implements Initializable {
 			Label textBImg = new Label();
 			Label textCImg = new Label();
 			Label textParaRaio1 = new Label();
-			
+			Label textSolo = new Label();
 			
 			//Zoom Label
 			textA.getTransforms().add(zoom);
@@ -472,11 +482,10 @@ public class NewProjectController implements Initializable {
 			
 			linhaSolo.setStartX(0);
 			linhaSolo.setStartY(alturaSolo);
-			linhaSolo.setEndX(stageCabos.getMaxWidth());
+			linhaSolo.setEndX(2000);
 			linhaSolo.setEndY(alturaSolo);
 			linhaSolo.setFill(Color.TRANSPARENT);
 			linhaSolo.setStroke(Color.PURPLE);
-		
 			
 			linhaABI.setStartX(faseAx);
 			linhaABI.setStartY(alturaSolo-faseAy);
@@ -517,9 +526,9 @@ public class NewProjectController implements Initializable {
 			linhaCBI.setStartX(faseCx);
 			linhaCBI.setStartY(alturaSolo-faseCy);
 			linhaCBI.setEndX(faseBx);
-			linhaCBI.setEndY(alturaSolo-faseBy);
-			linhaCBI.setFill(Color.WHITE);
-			linhaCBI.setStroke(Color.WHITE);
+			linhaCBI.setEndY(alturaSolo+faseBy);
+			linhaCBI.setFill(Color.BLUE);
+			linhaCBI.setStroke(Color.BLUE);
 			
 			
 			linhaAB.setStartX(faseAx);
@@ -533,16 +542,16 @@ public class NewProjectController implements Initializable {
 			linhaAC.setStartY(alturaSolo-faseAy);
 			linhaAC.setEndX(faseCx);
 			linhaAC.setEndY(alturaSolo-faseCy);
-			linhaAC.setFill(Color.YELLOW);
-			linhaAC.setStroke(Color.YELLOW);
+			linhaAC.setFill(Color.WHITE);
+			linhaAC.setStroke(Color.WHITE);
 
 			
 			linhaBC.setStartX(faseBx);
-			linhaBC.setStartY(alturaSolo+faseBy);
+			linhaBC.setStartY(alturaSolo-faseBy);
 			linhaBC.setEndX(faseCx);
 			linhaBC.setEndY(alturaSolo-faseCy);
-			linhaBC.setFill(Color.YELLOW);
-			linhaBC.setStroke(Color.YELLOW);
+			linhaBC.setFill(Color.WHITE);
+			linhaBC.setStroke(Color.WHITE);
 			
 			faseA.setCenterX(faseAx);
 			faseA.setCenterY(alturaSolo-faseAy);
@@ -555,6 +564,7 @@ public class NewProjectController implements Initializable {
 			faseAImagem.setFill(Color.RED);
 			faseAImagem.setStroke(Color.BLACK);
 			
+			if (selectNumCircuito == "DUPLO") {
 			faseD.setCenterX(faseDx);
 			faseD.setCenterY(alturaSolo-faseDy);
 			faseD.setRadius(10);
@@ -587,8 +597,20 @@ public class NewProjectController implements Initializable {
 			faseFImagem.setRadius(10);
 			faseFImagem.setFill(Color.BLUE);
 			faseFImagem.setStroke(Color.BLACK);
-			
-			
+			torrePane.getChildren().add(faseD);
+			torrePane.getChildren().add(faseE);
+			torrePane.getChildren().add(faseF);
+			torrePane.getChildren().add(faseDImagem);
+			torrePane.getChildren().add(faseEImagem);
+			torrePane.getChildren().add(faseFImagem);
+			faseDx = (faseDx/div1)*100;
+			faseEx = (faseEx/div1)*100;
+			faseFx = (faseFx/div1)*100;
+			faseDy = (faseDy/div2)*100;
+			faseEy = (faseEy/div2)*100;
+			faseFy = (faseFy/div2)*100;
+
+			}
 			
 			textB.setLayoutX(faseBx-12);
 			textB.setLayoutY(alturaSolo-faseBy-30);
@@ -635,6 +657,11 @@ public class NewProjectController implements Initializable {
 			textParaRaio1.setTextFill(Color.DARKGREEN);
 			textParaRaio1.setBackground(Background.fill(Color.WHITE));
 			
+			textSolo.setLayoutX(10);
+			textSolo.setLayoutY(alturaSolo-10);
+			textSolo.setText("SOLO");
+			textSolo.setTextFill(Color.DARKGREEN);
+			textSolo.setBackground(Background.fill(Color.WHITE));
 			
 			
 			
@@ -693,19 +720,22 @@ public class NewProjectController implements Initializable {
 			ParaRaio.setFill(Color.YELLOW);
 			ParaRaio.setStroke(Color.BLACK);
 			
-			CheckBox checkBox = new CheckBox("fluxo magnético fase e Imagem");
-	        checkBox.setLayoutX(50); 
-	        checkBox.setLayoutY(50); 
+			CheckBox checkBox1 = new CheckBox("fluxo concatenado fase e Imagem");
+	        checkBox1.setLayoutX(50); 
+	        checkBox1.setLayoutY(50); 
 			
+	        CheckBox checkBox2 = new CheckBox("fluxo concatenado entre fases");
+	        checkBox2.setLayoutX(275); 
+	        checkBox2.setLayoutY(50); 
+			
+	        CheckBox checkBox3 = new CheckBox("fluxo concatenado fases e para-raio");
+	        checkBox3.setLayoutX(500); 
+	        checkBox3.setLayoutY(50); 
+			
+	        
 			torrePane.getChildren().add(faseA);
 			torrePane.getChildren().add(faseB);
 			torrePane.getChildren().add(faseC);
-			torrePane.getChildren().add(faseD);
-			torrePane.getChildren().add(faseE);
-			torrePane.getChildren().add(faseF);
-			torrePane.getChildren().add(faseDImagem);
-			torrePane.getChildren().add(faseEImagem);
-			torrePane.getChildren().add(faseFImagem);
 			torrePane.getChildren().add(faseAImagem);
 			torrePane.getChildren().add(faseBImagem);
 			torrePane.getChildren().add(faseCImagem);
@@ -732,12 +762,13 @@ public class NewProjectController implements Initializable {
 			torrePane.getChildren().add(textParaRaio1);
 			torrePane.setBackground(Background.fill(Color.BLACK));
 			
+			
 		
 	        Pane area = new Pane();
 	        area.setPrefSize(50, 50); 
 	        area.setLayoutX(50); 
 	        area.setLayoutY(50);
-	        area.getChildren().add(checkBox);
+	        area.getChildren().addAll(checkBox1,checkBox2,checkBox3);
 
 	        containerZoom = new StackPane();
 	        containerZoom.getChildren().add(torrePane);
@@ -775,7 +806,7 @@ public class NewProjectController implements Initializable {
 			});
 			
 			 // Adicionar listener para o CheckBox
-	        checkBox.selectedProperty().addListener((obs, oldVal, newVal) -> {
+	        checkBox1.selectedProperty().addListener((obs, oldVal, newVal) -> {
 	        	linhaABI.setVisible(newVal);
 	        	linhaACI.setVisible(newVal);
 	        	linhaBAI.setVisible(newVal);
@@ -783,6 +814,21 @@ public class NewProjectController implements Initializable {
 	        	linhaCAI.setVisible(newVal);
 	        	linhaCBI.setVisible(newVal);
 
+	        });
+	        // Adicionar listener para o CheckBox
+	        checkBox2.selectedProperty().addListener((obs, oldVal, newVal) -> {
+	        	linhaAB.setVisible(newVal);
+	        	linhaAC.setVisible(newVal);
+	        	linhaBC.setVisible(newVal);
+
+	        });
+	        
+	        // Adicionar listener para o CheckBox
+	        checkBox3.selectedProperty().addListener((obs, oldVal, newVal) -> {
+	        	linhaParaRaioA.setVisible(newVal);
+	        	linhaParaRaioB.setVisible(newVal);
+	        	linhaParaRaioC.setVisible(newVal);
+	        
 	        });
 			
 			//stageCabos.setResizable(false);
