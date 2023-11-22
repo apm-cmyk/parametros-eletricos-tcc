@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainViewController">
+   <children>
+      <SplitPane prefHeight="400.0" prefWidth="145.0" />
+      <Button fx:id="btNewProject" layoutX="36.0" layoutY="58.0" mnemonicParsing="false" onAction="#onbtNewProjectClick" prefHeight="32.0" prefWidth="74.0" stylesheets="@Style.css" text="Novo" textAlignment="CENTER" />
+      <Text layoutX="154.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trabalho de Conclusão de Curso - TCC Universidade Federal Fluminense " wrappingWidth="207.521484375" />
+   </children>
+</Pane>

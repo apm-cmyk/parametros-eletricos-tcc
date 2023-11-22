@@ -1,0 +1,82 @@
+.button {
+    -fx-border-color:  white;
+    -fx-border-width: 2;
+    -fx-background-color:  	#FF7F50;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+     -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.button:hover {
+    -fx-background-color: #FFDEAD;
+    -fx-text-fill:  	#FF4500;
+}
+
+.button:pressed, .button:default:hover:pressed {
+  -fx-background-color:  	#FF4500;
+  -fx-text-fill:  	white;
+}
+
+.button:focused {
+    -fx-border-color: white, white;
+    -fx-border-width: 1, 1;
+    -fx-border-style: solid, segments(1, 1);
+    -fx-border-radius: 0, 0;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+
+.text-field {
+    -fx-background-color: #ffffff; /* Cor de fundo */
+    -fx-border-color: #000000; /* Cor da borda */
+    -fx-border-width: 1px; /* Largura da borda */
+    -fx-border-radius: 5px; /* Raio da borda para cantos arredondados */
+    -fx-padding: 5px; /* Preenchimento interno */
+}
+
+.text-field:focused {
+    -fx-border-color: #1E90FF; /* Cor da borda quando o campo está focado */
+}
+
+.text-field:hover {
+    -fx-border-color: #008000; /* Cor da borda quando o mouse está sobre o campo */
+}
+
+.combo-box {
+    -fx-background-color: #ffffff; /* Cor de fundo */
+    -fx-border-color: #000000; /* Cor da borda */
+    -fx-border-width: 1px; /* Largura da borda */
+    -fx-border-radius: 5px; /* Raio da borda para cantos arredondados */
+    -fx-padding: 5px; /* Preenchimento interno */
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #ffffff; /* Cor de fundo do botão de seta */
+}
+
+.combo-box .list-cell {
+    -fx-background-color: #ffffff; /* Cor de fundo do item na lista suspensa */
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #1E90FF; /* Cor de fundo do item na lista suspensa quando o mouse está sobre ele */
+}
+
+
+.label {
+    -fx-text-fill: #000000; /* Cor do texto */
+    -fx-font-size: 12px; /* Tamanho da fonte */
+    -fx-font-weight: bold; /* Peso da fonte (negrito) */
+    -fx-padding: 5px; /* Preenchimento interno */
+}
+
+
+.pane {
+    -fx-background-color: #f0f0f0; /* Cor de fundo do Pane */
+    -fx-border-color: #000000; /* Cor da borda */
+    -fx-border-width: 1px; /* Largura da borda */
+    -fx-border-radius: 5px; /* Raio da borda para cantos arredondados */
+    -fx-padding: 10px; /* Preenchimento interno */
+}
