@@ -177,6 +177,8 @@ public class NewProjectController implements Initializable {
 	
 	protected int numParaRaio = 1;
 	
+	private static Integer alturaSolo = 400;
+	
 	protected Double resistenciaFase;
 	protected Double resistenciaParaRaio;
 	protected Double resistividadeSolo;
@@ -199,7 +201,9 @@ public class NewProjectController implements Initializable {
 	
     private StackPane containerZoom;
 
-	
+    private Line linhaParaRaioA;
+	private Line linhaParaRaioB;
+	private Line linhaParaRaioC;
 	double[] distanciaFaseX = new double[numFase];
 	
 	protected Double faseAy;
@@ -376,8 +380,13 @@ public class NewProjectController implements Initializable {
 		//Criação do Painel da torre
 		torrePane = new Pane();
 		
-		
+		//Criação painel 2
+		Pane area = new Pane();
+        area.setPrefSize(50, 50); 
+        area.setLayoutX(50); 
+        area.setLayoutY(50);
 		zoom = new Scale(1, 1);
+		
         //torrePane.getTransforms().add(zoom);
 		
         
@@ -388,7 +397,6 @@ public class NewProjectController implements Initializable {
 			Circle faseAImagem = new Circle();
 			Circle faseBImagem = new Circle();
 			Circle faseCImagem = new Circle();
-			Circle ParaRaio = new Circle();
 			Circle faseD = new Circle();
 			Circle faseE = new Circle();
 			Circle faseF = new Circle();
@@ -400,15 +408,201 @@ public class NewProjectController implements Initializable {
 			double escala = 100;
 			double div1 = 3;
 			double div2 = 4;
-			faseAx = (faseAx/div1)*100;
-			faseBx = (faseBx/div1)*100;
-			faseCx = (faseCx/div1)*100;
-			faseAy = (faseAy/div2)*100;
-			faseBy = (faseBy/div2)*100;
-			faseCy = (faseCy/div2)*100;
+			double escalaX = 350;
+			faseAx = ((faseAx/div1)*escala)+escalaX;
+			faseBx = ((faseBx/div1)*escala)+escalaX;
+			faseCx = ((faseCx/div1)*escala)+escalaX;
+			faseAy = (faseAy/div2)*escala;
+			faseBy = (faseBy/div2)*escala;
+			faseCy = (faseCy/div2)*escala;
 			
-			paraRaioX = (paraRaioX/div1)*100;
-			paraRaioY = (paraRaioY/div2)*100;
+			
+			if (selectNumParaRaio == "UM" || selectNumParaRaio == "DOIS") {
+				
+				Circle ParaRaio = new Circle();
+				Label textParaRaio1 = new Label();
+				paraRaioX = ((paraRaioX/div1)*escala)+escalaX;
+				paraRaioY = ((paraRaioY/div2)*escala);
+				linhaParaRaioA = new Line();
+				linhaParaRaioB = new Line();
+				linhaParaRaioC = new Line();
+				Line linhaParaRaioSolo = new Line();
+				Line linhaParaRaioImgA = new Line();
+				Line linhaParaRaioImgB = new Line();
+				Line linhaParaRaioImgC = new Line();
+		
+				ParaRaio.getTransforms().add(zoom);
+				linhaParaRaioA.getTransforms().add(zoom);
+				linhaParaRaioB.getTransforms().add(zoom);
+				linhaParaRaioC.getTransforms().add(zoom);
+				linhaParaRaioImgA.getTransforms().add(zoom);
+				linhaParaRaioImgB.getTransforms().add(zoom);
+				linhaParaRaioImgC.getTransforms().add(zoom);
+				linhaParaRaioSolo.getTransforms().add(zoom);
+				textParaRaio1.getTransforms().add(zoom);
+			
+				textParaRaio1.setLayoutX(paraRaioX-12);
+				textParaRaio1.setLayoutY(alturaSolo-paraRaioY-30);
+				textParaRaio1.setText("PR");
+				textParaRaio1.setTextFill(Color.DARKGREEN);
+				textParaRaio1.setBackground(Background.fill(Color.WHITE));
+			
+				ParaRaio.setCenterX(paraRaioX);
+				ParaRaio.setCenterY(alturaSolo-paraRaioY);
+				ParaRaio.setRadius(10);
+				ParaRaio.setFill(Color.YELLOW);
+				ParaRaio.setStroke(Color.BLACK);
+				
+				linhaParaRaioSolo.setStartX(paraRaioX);
+				linhaParaRaioSolo.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioSolo.setEndX(paraRaioX);
+				linhaParaRaioSolo.setEndY(alturaSolo);
+				linhaParaRaioSolo.setFill(Color.YELLOW);
+				linhaParaRaioSolo .setStroke(Color.YELLOW);
+				
+			
+				linhaParaRaioB.setStartX(paraRaioX);
+				linhaParaRaioB.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioB.setEndX(faseBx);
+				linhaParaRaioB.setEndY(alturaSolo-faseBy);
+				linhaParaRaioB.setFill(Color.YELLOW);
+				linhaParaRaioB.setStroke(Color.YELLOW);
+				
+				linhaParaRaioImgA.setStartX(paraRaioX);
+				linhaParaRaioImgA.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioImgA.setEndX(faseAx);
+				linhaParaRaioImgA.setEndY(alturaSolo+faseAy);
+				linhaParaRaioImgA.setFill(Color.YELLOW);
+				linhaParaRaioImgA.setStroke(Color.YELLOW);
+				
+				
+				linhaParaRaioImgB.setStartX(paraRaioX);
+				linhaParaRaioImgB.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioImgB.setEndX(faseBx);
+				linhaParaRaioImgB.setEndY(alturaSolo+faseBy);
+				linhaParaRaioImgB.setFill(Color.YELLOW);
+				linhaParaRaioImgB.setStroke(Color.YELLOW);
+				
+				linhaParaRaioImgC.setStartX(paraRaioX);
+				linhaParaRaioImgC.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioImgC.setEndX(faseCx);
+				linhaParaRaioImgC.setEndY(alturaSolo+faseCy);
+				linhaParaRaioImgC.setFill(Color.YELLOW);
+				linhaParaRaioImgC.setStroke(Color.YELLOW);
+				
+				
+				
+				linhaParaRaioC.setStartX(paraRaioX);
+				linhaParaRaioC.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioC.setEndX(faseCx);
+				linhaParaRaioC.setEndY(alturaSolo-faseCy);
+				linhaParaRaioC.setFill(Color.YELLOW);
+				linhaParaRaioC.setStroke(Color.YELLOW);
+
+				linhaParaRaioA.setStartX(paraRaioX);
+				linhaParaRaioA.setStartY(alturaSolo-paraRaioY);
+				linhaParaRaioA.setEndX(faseAx);
+				linhaParaRaioA.setEndY(alturaSolo-faseAy);
+				linhaParaRaioA.setFill(Color.YELLOW);
+				linhaParaRaioA.setStroke(Color.YELLOW);
+
+				torrePane.getChildren().add(textParaRaio1);
+				torrePane.getChildren().add(ParaRaio);
+				torrePane.getChildren().add(linhaParaRaioA);
+				torrePane.getChildren().add(linhaParaRaioB);
+				torrePane.getChildren().add(linhaParaRaioC);
+				torrePane.getChildren().add(linhaParaRaioSolo);
+				torrePane.getChildren().add(linhaParaRaioImgA);
+				torrePane.getChildren().add(linhaParaRaioImgB);
+				torrePane.getChildren().add(linhaParaRaioImgC);
+				
+				CheckBox checkBox3 = new CheckBox("fases e para-raio");
+		        checkBox3.setLayoutX(50); 
+		        checkBox3.setLayoutY(15); 
+				
+		        CheckBox checkBox4 = new CheckBox("para-raio e imagem");
+		        checkBox4.setLayoutX(200); 
+		        checkBox4.setLayoutY(15); 
+				
+		        CheckBox checkBox5 = new CheckBox("para-raio e solo");
+		        checkBox5.setLayoutX(350); 
+		        checkBox5.setLayoutY(15); 
+				
+				checkBox3.selectedProperty().addListener((obs, oldVal, newVal) -> {
+		        	linhaParaRaioA.setVisible(newVal);
+		        	linhaParaRaioB.setVisible(newVal);
+		        	linhaParaRaioC.setVisible(newVal);
+		        
+		        });
+				
+				checkBox4.selectedProperty().addListener((obs, oldVal, newVal) -> {
+		        	linhaParaRaioImgA.setVisible(newVal);
+		        	linhaParaRaioImgB.setVisible(newVal);
+		        	linhaParaRaioImgC.setVisible(newVal);
+		        
+		        });
+				
+		        checkBox5.selectedProperty().addListener((obs, oldVal, newVal) -> {
+		        	linhaParaRaioSolo.setVisible(newVal);
+		        });
+				
+		        area.getChildren().addAll(checkBox3,checkBox4,checkBox5);
+
+		        
+			}else if(selectNumParaRaio == "DOIS") {
+				
+			}
+			
+			if (selectNumCircuito == "DUPLO") {
+			
+			faseDx = ((faseDx/div1)*escala)+escalaX+350;
+			faseEx = ((faseEx/div1)*escala)+escalaX+350;
+			faseFx = ((faseFx/div1)*escala)+escalaX+350;
+			faseDy = (faseDy/div2)*escala;
+			faseEy = (faseEy/div2)*escala;
+			faseFy = (faseFy/div2)*escala;
+
+			faseD.setCenterX(faseDx);
+			faseD.setCenterY(alturaSolo-faseDy);
+			faseD.setRadius(10);
+			faseD.setFill(Color.RED);
+			faseA.setStroke(Color.BLACK);
+			faseDImagem.setCenterX(faseDx);
+			faseDImagem.setCenterY(alturaSolo+faseDy);
+			faseDImagem.setRadius(10);
+			faseDImagem.setFill(Color.RED);
+			faseDImagem.setStroke(Color.BLACK);
+			
+			faseE.setCenterX(faseEx);
+			faseE.setCenterY(alturaSolo-faseEy);
+			faseE.setRadius(10);
+			faseE.setFill(Color.MAGENTA);
+			faseE.setStroke(Color.BLACK);
+			faseEImagem.setCenterX(faseEx);
+			faseEImagem.setCenterY(alturaSolo+faseEy);
+			faseEImagem.setRadius(10);
+			faseEImagem.setFill(Color.MAGENTA);
+			faseEImagem.setStroke(Color.BLACK);
+			
+			faseF.setCenterX(faseFx);
+			faseF.setCenterY(alturaSolo-faseFy);
+			faseF.setRadius(10);
+			faseF.setFill(Color.BLUE);
+			faseF.setStroke(Color.BLACK);
+			faseFImagem.setCenterX(faseFx);
+			faseFImagem.setCenterY(alturaSolo+faseFy);
+			faseFImagem.setRadius(10);
+			faseFImagem.setFill(Color.BLUE);
+			faseFImagem.setStroke(Color.BLACK);
+			torrePane.getChildren().add(faseD);
+			torrePane.getChildren().add(faseE);
+			torrePane.getChildren().add(faseF);
+			torrePane.getChildren().add(faseDImagem);
+			torrePane.getChildren().add(faseEImagem);
+			torrePane.getChildren().add(faseFImagem);
+			
+			}
+
 			
 			//Zoom nos Circle
 			faseA.getTransforms().add(zoom);
@@ -427,7 +621,6 @@ public class NewProjectController implements Initializable {
 			faseFImagem.getTransforms().add(zoom);
 			
 			
-			ParaRaio.getTransforms().add(zoom);
 			ParaRaio2.getTransforms().add(zoom);
 
 			
@@ -438,7 +631,7 @@ public class NewProjectController implements Initializable {
 			Label textAImg = new Label();
 			Label textBImg = new Label();
 			Label textCImg = new Label();
-			Label textParaRaio1 = new Label();
+			
 			Label textSolo = new Label();
 			
 			//Zoom Label
@@ -448,7 +641,6 @@ public class NewProjectController implements Initializable {
 			textAImg.getTransforms().add(zoom);
 			textBImg.getTransforms().add(zoom);
 			textCImg.getTransforms().add(zoom);
-			textParaRaio1.getTransforms().add(zoom);
 
 			
 			Line linhaAB = new Line();
@@ -460,10 +652,11 @@ public class NewProjectController implements Initializable {
 			Line linhaBAI = new Line();
 			Line linhaCAI = new Line();
 			Line linhaCBI = new Line();
-			Line linhaParaRaioA = new Line();
-			Line linhaParaRaioB = new Line();
-			Line linhaParaRaioC = new Line();
+			
 			Line linhaSolo = new Line();
+			Line linhaFaseASolo = new Line();
+			Line linhaFaseBSolo = new Line();
+			Line linhaFaseCSolo = new Line();
 			
 			linhaAB.getTransforms().add(zoom);
 			linhaAC.getTransforms().add(zoom);
@@ -474,18 +667,38 @@ public class NewProjectController implements Initializable {
 			linhaBAI.getTransforms().add(zoom);
 			linhaCAI.getTransforms().add(zoom);
 			linhaCBI.getTransforms().add(zoom);
-			linhaParaRaioA.getTransforms().add(zoom);
-			linhaParaRaioB.getTransforms().add(zoom);
-			linhaParaRaioC.getTransforms().add(zoom);
+			linhaFaseASolo.getTransforms().add(zoom);
+			linhaFaseBSolo.getTransforms().add(zoom);
+			linhaFaseCSolo.getTransforms().add(zoom);
+
+			linhaFaseASolo.setStartX(faseAx);
+			linhaFaseASolo.setStartY(alturaSolo-faseAy);
+			linhaFaseASolo.setEndX(faseAx);
+			linhaFaseASolo.setEndY(alturaSolo);
+			linhaFaseASolo.setFill(Color.RED);
+			linhaFaseASolo.setStroke(Color.RED);
 			
-			Integer alturaSolo = 400;
+			linhaFaseBSolo.setStartX(faseBx);
+			linhaFaseBSolo.setStartY(alturaSolo-faseBy);
+			linhaFaseBSolo.setEndX(faseBx);
+			linhaFaseBSolo.setEndY(alturaSolo);
+			linhaFaseBSolo.setFill(Color.MAGENTA);
+			linhaFaseBSolo.setStroke(Color.MAGENTA);
+			
+			linhaFaseCSolo.setStartX(faseCx);
+			linhaFaseCSolo.setStartY(alturaSolo-faseCy);
+			linhaFaseCSolo.setEndX(faseCx);
+			linhaFaseCSolo.setEndY(alturaSolo);
+			linhaFaseCSolo.setFill(Color.BLUE);
+			linhaFaseCSolo.setStroke(Color.BLUE);
+			
 			
 			linhaSolo.setStartX(0);
 			linhaSolo.setStartY(alturaSolo);
 			linhaSolo.setEndX(2000);
 			linhaSolo.setEndY(alturaSolo);
 			linhaSolo.setFill(Color.TRANSPARENT);
-			linhaSolo.setStroke(Color.PURPLE);
+			linhaSolo.setStroke(Color.WHITE);
 			
 			linhaABI.setStartX(faseAx);
 			linhaABI.setStartY(alturaSolo-faseAy);
@@ -564,54 +777,7 @@ public class NewProjectController implements Initializable {
 			faseAImagem.setFill(Color.RED);
 			faseAImagem.setStroke(Color.BLACK);
 			
-			if (selectNumCircuito == "DUPLO") {
-			faseD.setCenterX(faseDx);
-			faseD.setCenterY(alturaSolo-faseDy);
-			faseD.setRadius(10);
-			faseD.setFill(Color.RED);
-			faseA.setStroke(Color.BLACK);
-			faseDImagem.setCenterX(faseDx);
-			faseDImagem.setCenterY(alturaSolo+faseDy);
-			faseDImagem.setRadius(10);
-			faseDImagem.setFill(Color.RED);
-			faseDImagem.setStroke(Color.BLACK);
-			
-			faseE.setCenterX(faseEx);
-			faseE.setCenterY(alturaSolo-faseEy);
-			faseE.setRadius(10);
-			faseE.setFill(Color.MAGENTA);
-			faseE.setStroke(Color.BLACK);
-			faseEImagem.setCenterX(faseEx);
-			faseEImagem.setCenterY(alturaSolo+faseEy);
-			faseEImagem.setRadius(10);
-			faseEImagem.setFill(Color.MAGENTA);
-			faseEImagem.setStroke(Color.BLACK);
-			
-			faseF.setCenterX(faseFx);
-			faseF.setCenterY(alturaSolo-faseFy);
-			faseF.setRadius(10);
-			faseF.setFill(Color.BLUE);
-			faseF.setStroke(Color.BLACK);
-			faseFImagem.setCenterX(faseFx);
-			faseFImagem.setCenterY(alturaSolo+faseFy);
-			faseFImagem.setRadius(10);
-			faseFImagem.setFill(Color.BLUE);
-			faseFImagem.setStroke(Color.BLACK);
-			torrePane.getChildren().add(faseD);
-			torrePane.getChildren().add(faseE);
-			torrePane.getChildren().add(faseF);
-			torrePane.getChildren().add(faseDImagem);
-			torrePane.getChildren().add(faseEImagem);
-			torrePane.getChildren().add(faseFImagem);
-			faseDx = (faseDx/div1)*100;
-			faseEx = (faseEx/div1)*100;
-			faseFx = (faseFx/div1)*100;
-			faseDy = (faseDy/div2)*100;
-			faseEy = (faseEy/div2)*100;
-			faseFy = (faseFy/div2)*100;
-
-			}
-			
+						
 			textB.setLayoutX(faseBx-12);
 			textB.setLayoutY(alturaSolo-faseBy-30);
 			textB.setRotate(0);
@@ -651,43 +817,13 @@ public class NewProjectController implements Initializable {
 			textCImg.setBackground(Background.fill(Color.WHITE));
 			
 			
-			textParaRaio1.setLayoutX(paraRaioX-12);
-			textParaRaio1.setLayoutY(alturaSolo-paraRaioY-30);
-			textParaRaio1.setText("PR");
-			textParaRaio1.setTextFill(Color.DARKGREEN);
-			textParaRaio1.setBackground(Background.fill(Color.WHITE));
 			
 			textSolo.setLayoutX(10);
 			textSolo.setLayoutY(alturaSolo-10);
 			textSolo.setText("SOLO");
 			textSolo.setTextFill(Color.DARKGREEN);
 			textSolo.setBackground(Background.fill(Color.WHITE));
-			
-			
-			
-			
-			
-			linhaParaRaioB.setStartX(paraRaioX);
-			linhaParaRaioB.setStartY(alturaSolo-paraRaioY);
-			linhaParaRaioB.setEndX(faseBx);
-			linhaParaRaioB.setEndY(alturaSolo-faseBy);
-			linhaParaRaioB.setFill(Color.YELLOW);
-			linhaParaRaioB.setStroke(Color.YELLOW);
-			
-			linhaParaRaioC.setStartX(paraRaioX);
-			linhaParaRaioC.setStartY(alturaSolo-paraRaioY);
-			linhaParaRaioC.setEndX(faseCx);
-			linhaParaRaioC.setEndY(alturaSolo-faseCy);
-			linhaParaRaioC.setFill(Color.YELLOW);
-			linhaParaRaioC.setStroke(Color.YELLOW);
-
-			linhaParaRaioA.setStartX(paraRaioX);
-			linhaParaRaioA.setStartY(alturaSolo-paraRaioY);
-			linhaParaRaioA.setEndX(faseAx);
-			linhaParaRaioA.setEndY(alturaSolo-faseAy);
-			linhaParaRaioA.setFill(Color.YELLOW);
-			linhaParaRaioA.setStroke(Color.YELLOW);
-
+						
 			
 				
 			faseB.setCenterX(faseBx);
@@ -714,24 +850,21 @@ public class NewProjectController implements Initializable {
 			faseCImagem.setFill(Color.BLUE);
 			faseCImagem.setStroke(Color.BLACK);
 			
-			ParaRaio.setCenterX(paraRaioX);
-			ParaRaio.setCenterY(alturaSolo-paraRaioY);
-			ParaRaio.setRadius(10);
-			ParaRaio.setFill(Color.YELLOW);
-			ParaRaio.setStroke(Color.BLACK);
 			
-			CheckBox checkBox1 = new CheckBox("fluxo concatenado fase e Imagem");
+			CheckBox checkBox1 = new CheckBox("fase e Imagem");
 	        checkBox1.setLayoutX(50); 
-	        checkBox1.setLayoutY(50); 
+	        checkBox1.setLayoutY(40); 
 			
-	        CheckBox checkBox2 = new CheckBox("fluxo concatenado entre fases");
-	        checkBox2.setLayoutX(275); 
-	        checkBox2.setLayoutY(50); 
+	        CheckBox checkBox2 = new CheckBox("entre fases");
+	        checkBox2.setLayoutX(200); 
+	        checkBox2.setLayoutY(40); 
 			
-	        CheckBox checkBox3 = new CheckBox("fluxo concatenado fases e para-raio");
-	        checkBox3.setLayoutX(500); 
-	        checkBox3.setLayoutY(50); 
+	        
+	        CheckBox checkBox6 = new CheckBox("fase e solo");
+	        checkBox6.setLayoutX(350); 
+	        checkBox6.setLayoutY(40); 
 			
+	        
 	        
 			torrePane.getChildren().add(faseA);
 			torrePane.getChildren().add(faseB);
@@ -748,27 +881,20 @@ public class NewProjectController implements Initializable {
 			torrePane.getChildren().add(linhaBAI);
 			torrePane.getChildren().add(linhaCAI);
 			torrePane.getChildren().add(linhaCBI);
-			torrePane.getChildren().add(ParaRaio);
-			torrePane.getChildren().add(linhaParaRaioA);
-			torrePane.getChildren().add(linhaParaRaioB);
-			torrePane.getChildren().add(linhaParaRaioC);
 			torrePane.getChildren().add(linhaSolo);
+			torrePane.getChildren().add(linhaFaseASolo);
+			torrePane.getChildren().add(linhaFaseBSolo);
+			torrePane.getChildren().add(linhaFaseCSolo);
 			torrePane.getChildren().add(textA);
 			torrePane.getChildren().add(textB);
 			torrePane.getChildren().add(textC);
 			torrePane.getChildren().add(textAImg);
 			torrePane.getChildren().add(textBImg);
 			torrePane.getChildren().add(textCImg);
-			torrePane.getChildren().add(textParaRaio1);
 			torrePane.setBackground(Background.fill(Color.BLACK));
 			
-			
 		
-	        Pane area = new Pane();
-	        area.setPrefSize(50, 50); 
-	        area.setLayoutX(50); 
-	        area.setLayoutY(50);
-	        area.getChildren().addAll(checkBox1,checkBox2,checkBox3);
+	        area.getChildren().addAll(checkBox1,checkBox2,checkBox6);
 
 	        containerZoom = new StackPane();
 	        containerZoom.getChildren().add(torrePane);
@@ -824,11 +950,14 @@ public class NewProjectController implements Initializable {
 	        });
 	        
 	        // Adicionar listener para o CheckBox
-	        checkBox3.selectedProperty().addListener((obs, oldVal, newVal) -> {
-	        	linhaParaRaioA.setVisible(newVal);
-	        	linhaParaRaioB.setVisible(newVal);
-	        	linhaParaRaioC.setVisible(newVal);
 	        
+			
+	        
+	        checkBox6.selectedProperty().addListener((obs, oldVal, newVal) -> {
+	        	linhaFaseASolo.setVisible(newVal);
+	        	linhaFaseBSolo.setVisible(newVal);
+	        	linhaFaseCSolo.setVisible(newVal);
+	  
 	        });
 			
 			//stageCabos.setResizable(false);
