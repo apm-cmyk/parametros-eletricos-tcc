@@ -1,9 +1,8 @@
 package utilitarios;
 
 
-import java.io.FileWriter;
+
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import org.apache.commons.math4.legacy.linear.LUDecomposition;
 import org.apache.commons.math4.legacy.linear.MatrixUtils;
@@ -334,7 +333,7 @@ return cs3;
 			@SuppressWarnings("unused")
 			int x1=0;
 			for (int i1=0; i1<dados.getNumFase(); i1++) {
-				for (int j1=0; j1<dados.getNumFase(); j1++) {
+				for (int j1=0; j1<dados.getNumParaRaio(); j1++) {
 			matrizRf3[i1][j1] = parametro3.calculoLongitudinalMutuoParaRaio(hr[j1], dr2[i1], Dmr2, dmr2);
 			matrizRf1[i1][j1] = matrizRf1[i1][j1].soma(matrizRf3[i1][j1]);
 			matrizRf1Real[i1][j1] = matrizRf1[i1][j1].getReal();
@@ -358,11 +357,12 @@ return cs3;
 				}
 				
 		for (int i1=0; i1<dados.getNumFase(); i1++) {
-			
-				matrizFr1[i1][0] = parametro3.calculoLongitudinalMutuoParaRaio(hr[0], dr[i1], Dmr, dmr);
-				matrizFr1[i1][1] = parametro3.calculoLongitudinalMutuoParaRaio(hr[1], dr[i1+3], Dms, dms);
-				matrizRf1[0][i1] = parametro3.calculoLongitudinalMutuoParaRaio(hr[0], dr[i1], Dmr, dmr);
-				matrizRf1[1][i1] = parametro3.calculoLongitudinalMutuoParaRaio(hr[1], dr[i1+3], Dms, dms);
+			int i2 = 3;
+				matrizFr1[0][i1] = parametro3.calculoLongitudinalMutuoParaRaio(hr[0], dr[i1], Dmr, dmr);
+				matrizFr1[1][i1] = parametro3.calculoLongitudinalMutuoParaRaio(1, dr[i2], Dms, dms);
+				matrizRf1[i1][0] = parametro3.calculoLongitudinalMutuoParaRaio(hr[0], dr[i1], Dmr, dmr);
+				matrizRf1[i1][0] = parametro3.calculoLongitudinalMutuoParaRaio(1, dr[i2], Dms, dms);
+				i2++;
 		}
 						
 			}

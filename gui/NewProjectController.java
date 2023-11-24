@@ -173,9 +173,9 @@ public class NewProjectController implements Initializable {
 	private Scale zoom;
 	
 	/*Considerando como variavel local*/
-	protected int numFase = 3;
+	private int numFase = 3;
 	
-	protected int numParaRaio = 1;
+	private int numParaRaio;
 	
 	private static Integer alturaSolo = 400;
 	
@@ -204,26 +204,27 @@ public class NewProjectController implements Initializable {
     private Line linhaParaRaioA;
 	private Line linhaParaRaioB;
 	private Line linhaParaRaioC;
-	double[] distanciaFaseX = new double[numFase];
+	
 	
 	protected Double faseAy;
 	protected Double faseBy;
 	protected Double faseCy;
 	
-	double[] distanciaFaseY = new double[numFase];
+	double[] distanciaFaseX = new double[3];
+	double[] distanciaFaseY = new double[3];
 	
 	Double paraRaioX;
 	Double paraRaioY;
 	
-	double[] distanciaParaRaioX = new double[numParaRaio];
-	double[] distanciaParaRaioY = new double[numParaRaio];
+	double[] distanciaParaRaioX;
+	double[] distanciaParaRaioY;
 	
 	
 	protected Double faseDx;
 	protected Double faseEx;
 	protected Double faseFx;
 	
-	double[] distanciaFaseX2 = new double[numFase];
+	double[] distanciaFaseX2;
 	
 	private static final double ZOOM_FACTOR = 1.1; // Fator de zoom
 	
@@ -231,14 +232,14 @@ public class NewProjectController implements Initializable {
 	protected Double faseEy;
 	protected Double faseFy;
 	
-	double[] distanciaFaseY2 = new double[numFase];
+	double[] distanciaFaseY2;
 	
 	Double paraRaioXS;
 	Double paraRaioYS;
 	
 	
-	double[] distanciaParaRaioXS = new double[numParaRaio];
-	double[] distanciaParaRaioYS = new double[numParaRaio];
+	double[] distanciaParaRaioXS;
+	double[] distanciaParaRaioYS;
 
 	
 	//-------------------Métodos-----------------------//
@@ -417,7 +418,7 @@ public class NewProjectController implements Initializable {
 			faseCy = (faseCy/div2)*escala;
 			
 			
-			if (selectNumParaRaio == "UM" || selectNumParaRaio == "DOIS") {
+			if ((selectNumParaRaio == "UM" || selectNumParaRaio == "DOIS") ) {
 				
 				Circle ParaRaio = new Circle();
 				Label textParaRaio1 = new Label();
@@ -426,12 +427,12 @@ public class NewProjectController implements Initializable {
 				linhaParaRaioA = new Line();
 				linhaParaRaioB = new Line();
 				linhaParaRaioC = new Line();
+				
+				if (selectTipoParaRaio =="MULTI ATERRADO") {
 				Line linhaParaRaioSolo = new Line();
 				Line linhaParaRaioImgA = new Line();
 				Line linhaParaRaioImgB = new Line();
 				Line linhaParaRaioImgC = new Line();
-		
-				ParaRaio.getTransforms().add(zoom);
 				linhaParaRaioA.getTransforms().add(zoom);
 				linhaParaRaioB.getTransforms().add(zoom);
 				linhaParaRaioC.getTransforms().add(zoom);
@@ -439,20 +440,6 @@ public class NewProjectController implements Initializable {
 				linhaParaRaioImgB.getTransforms().add(zoom);
 				linhaParaRaioImgC.getTransforms().add(zoom);
 				linhaParaRaioSolo.getTransforms().add(zoom);
-				textParaRaio1.getTransforms().add(zoom);
-			
-				textParaRaio1.setLayoutX(paraRaioX-12);
-				textParaRaio1.setLayoutY(alturaSolo-paraRaioY-30);
-				textParaRaio1.setText("PR");
-				textParaRaio1.setTextFill(Color.DARKGREEN);
-				textParaRaio1.setBackground(Background.fill(Color.WHITE));
-			
-				ParaRaio.setCenterX(paraRaioX);
-				ParaRaio.setCenterY(alturaSolo-paraRaioY);
-				ParaRaio.setRadius(10);
-				ParaRaio.setFill(Color.YELLOW);
-				ParaRaio.setStroke(Color.BLACK);
-				
 				linhaParaRaioSolo.setStartX(paraRaioX);
 				linhaParaRaioSolo.setStartY(alturaSolo-paraRaioY);
 				linhaParaRaioSolo.setEndX(paraRaioX);
@@ -505,17 +492,11 @@ public class NewProjectController implements Initializable {
 				linhaParaRaioA.setEndY(alturaSolo-faseAy);
 				linhaParaRaioA.setFill(Color.YELLOW);
 				linhaParaRaioA.setStroke(Color.YELLOW);
-
-				torrePane.getChildren().add(textParaRaio1);
-				torrePane.getChildren().add(ParaRaio);
-				torrePane.getChildren().add(linhaParaRaioA);
-				torrePane.getChildren().add(linhaParaRaioB);
-				torrePane.getChildren().add(linhaParaRaioC);
 				torrePane.getChildren().add(linhaParaRaioSolo);
 				torrePane.getChildren().add(linhaParaRaioImgA);
 				torrePane.getChildren().add(linhaParaRaioImgB);
 				torrePane.getChildren().add(linhaParaRaioImgC);
-				
+
 				CheckBox checkBox3 = new CheckBox("fases e para-raio");
 		        checkBox3.setLayoutX(50); 
 		        checkBox3.setLayoutY(15); 
@@ -527,14 +508,7 @@ public class NewProjectController implements Initializable {
 		        CheckBox checkBox5 = new CheckBox("para-raio e solo");
 		        checkBox5.setLayoutX(350); 
 		        checkBox5.setLayoutY(15); 
-				
-				checkBox3.selectedProperty().addListener((obs, oldVal, newVal) -> {
-		        	linhaParaRaioA.setVisible(newVal);
-		        	linhaParaRaioB.setVisible(newVal);
-		        	linhaParaRaioC.setVisible(newVal);
-		        
-		        });
-				
+
 				checkBox4.selectedProperty().addListener((obs, oldVal, newVal) -> {
 		        	linhaParaRaioImgA.setVisible(newVal);
 		        	linhaParaRaioImgB.setVisible(newVal);
@@ -546,9 +520,47 @@ public class NewProjectController implements Initializable {
 		        	linhaParaRaioSolo.setVisible(newVal);
 		        });
 				
+		        checkBox3.selectedProperty().addListener((obs, oldVal, newVal) -> {
+		        	linhaParaRaioA.setVisible(newVal);
+		        	linhaParaRaioB.setVisible(newVal);
+		        	linhaParaRaioC.setVisible(newVal);
+		        
+		        });
+				
+				
 		        area.getChildren().addAll(checkBox3,checkBox4,checkBox5);
 
-		        
+		        torrePane.getChildren().add(linhaParaRaioA);
+				torrePane.getChildren().add(linhaParaRaioB);
+				torrePane.getChildren().add(linhaParaRaioC);
+				
+				
+				}
+				
+				
+				ParaRaio.getTransforms().add(zoom);
+				
+				textParaRaio1.getTransforms().add(zoom);
+			
+				textParaRaio1.setLayoutX(paraRaioX-12);
+				textParaRaio1.setLayoutY(alturaSolo-paraRaioY-30);
+				textParaRaio1.setText("para-raio");
+				textParaRaio1.setTextFill(Color.DARKGREEN);
+				textParaRaio1.setBackground(Background.fill(Color.WHITE));
+			
+				ParaRaio.setCenterX(paraRaioX);
+				ParaRaio.setCenterY(alturaSolo-paraRaioY);
+				ParaRaio.setRadius(10);
+				ParaRaio.setFill(Color.YELLOW);
+				ParaRaio.setStroke(Color.BLACK);
+				
+				
+				torrePane.getChildren().add(textParaRaio1);
+				torrePane.getChildren().add(ParaRaio);
+				
+				
+				
+						        
 			}else if(selectNumParaRaio == "DOIS") {
 				
 			}
@@ -658,6 +670,7 @@ public class NewProjectController implements Initializable {
 			Line linhaFaseBSolo = new Line();
 			Line linhaFaseCSolo = new Line();
 			
+			linhaSolo.getTransforms().add(zoom);
 			linhaAB.getTransforms().add(zoom);
 			linhaAC.getTransforms().add(zoom);
 			linhaBC.getTransforms().add(zoom);
@@ -999,7 +1012,12 @@ public class NewProjectController implements Initializable {
 		faseAy = Double.parseDouble(tfFaseAy.getText());
 		faseBy = Double.parseDouble(tfFaseBy.getText());
 		faseCy = Double.parseDouble(tfFaseCy.getText());
-	
+		
+		System.out.println(faseAy);
+		System.out.println(faseBy);
+		System.out.println(faseCy);
+
+		
 		distanciaFaseY[0]= faseAy;
 		distanciaFaseY[1]= faseBy;
 		distanciaFaseY[2]= faseCy;
@@ -1009,17 +1027,34 @@ public class NewProjectController implements Initializable {
 		selectTipoParaRaio = cbTipoParaRaio.getValue();
 		selectNumCircuito = cbNumCircuito.getValue();
 		
-				
-			
-		if(selectNumParaRaio=="UM") {
+		if("UM".equals(selectNumParaRaio)) {numParaRaio=1;}
+		if("DOIS".equals(selectNumParaRaio)) {numParaRaio=2;}
+		
+		//inicializa os vetores dependentes do numParaRaio
+		distanciaParaRaioX = new double[numParaRaio];
+		distanciaParaRaioY = new double[numParaRaio];
+		distanciaParaRaioXS = new double[numParaRaio];
+		distanciaParaRaioYS = new double[numParaRaio];
+
+		//inicializa vetores dependentes das numfases
+		
+		distanciaFaseX = new double[numFase];
+		distanciaFaseY = new double[numFase];
+		distanciaFaseX2 = new double[numFase];
+		distanciaFaseY2 = new double[numFase];
+
+
+
+		
+		
+		if("UM".equals(selectNumParaRaio)) {
 		paraRaioX = Double.parseDouble(tfParaRaioRX.getText());
 		paraRaioY = Double.parseDouble(tfParaRaioRY.getText());
 		distanciaParaRaioX[0]= paraRaioX;
 		distanciaParaRaioY[0]= paraRaioY;
-		numParaRaio =1;
-		
-		
-		} if(selectNumParaRaio=="DOIS") {
+	
+		} 
+		if("DOIS".equals(selectNumParaRaio)) {
 		paraRaioX = Double.parseDouble(tfParaRaioRX.getText());
 		paraRaioY = Double.parseDouble(tfParaRaioRY.getText());
 		paraRaioXS = Double.parseDouble(tfParaRaioSX.getText());
@@ -1028,12 +1063,12 @@ public class NewProjectController implements Initializable {
 		distanciaParaRaioY[0]= paraRaioY;
 		distanciaParaRaioX[1]= paraRaioXS;
 		distanciaParaRaioY[1]= paraRaioYS;
-		numParaRaio =2;
+
 		}
 		
 		
 		
-		if(selectNumCircuito=="DUPLO") {
+		if("DUPLO".equals(selectNumCircuito)) {
 			faseDx = Double.parseDouble(tfFaseDx.getText());
 			faseEx = Double.parseDouble(tfFaseEx.getText());
 			faseFx = Double.parseDouble(tfFaseFx.getText());		
@@ -1052,6 +1087,7 @@ public class NewProjectController implements Initializable {
 			
 		}
 		
+				
 		
 		@SuppressWarnings("unused")
 		boolean a = false;

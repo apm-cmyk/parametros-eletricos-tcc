@@ -100,24 +100,31 @@ public class CalculoGeometrico extends NewProjectController {
 		alturaMediaFase();
 		alturaMediaParaRaio();
 		dmgFases();
-		dmgFasesParaRaio();
-		distanciaFase2ParaRaio();
+		dmgFasesParaRaio();	
 		distanciaFaseImagem(); 
 		dmgFasesImagem(); 
 		distanciaImagemParaRaio();
-		distanciaImagem2ParaRaio();
 		dmgImagemParaRaio();
-		distanciaFase1Imagem2() ;
-		distanciaFase1Fase2();
-		dmgFasesImagem2();
-		dmgFases2();
-		dmgFases2ParaRaio();
-		dmgImagem2ParaRaio();
+		
+		if (numParaRaio>1 && numFase>3) {
+		dmgImagemParaRaioRS();
+		}
 		
 		if (numParaRaio>1) {
-		dmgImagemParaRaioRS();
+		
 		distanciaParaRaioRS();
-		distanciaImagemParaRaioRS();
+		
+		}
+		
+		if (numFase>3) {
+			distanciaFase2ParaRaio();	
+			distanciaImagem2ParaRaio();
+			distanciaFase1Imagem2() ;
+			distanciaFase1Fase2();
+			dmgFasesImagem2();
+			dmgFases2();
+			dmgFases2ParaRaio();
+			dmgImagem2ParaRaio();	
 		}
 }
 	
