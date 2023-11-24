@@ -262,6 +262,7 @@ return cs3;
 				//Calculo Parametro Longitudinal Proprio
 				if(i==j) {
 			
+
 					matrizZ[i][j] = parametro2.calculoLongitudinalProprio(h[i],Ds,hm);
 					matrizZReal[i][j] = matrizZ[i][j].getReal();
 					matrizZImg[i][j] = matrizZ[i][j].getImag();		
@@ -378,12 +379,13 @@ return cs3;
 		}
 
 		//Reducao de Kron
-
-		r = new ReducaoKron(matrizZReal,matrizRr1Real,matrizRf1Real, matrizFr1Real);
-		xl = new ReducaoKron(matrizZImg,matrizRr1Img,matrizRf1Img, matrizFr1Img);
+		
+		
 		
 		if ((selectNumParaRaio =="ZERO") || (selectTipoParaRaio == "ISOLADO")) {
 		
+			r = new ReducaoKron();
+			xl = new ReducaoKron();
 			r.setAeq(matrizZReal);
 			xl.setAeq(matrizZImg);
 			cs1 = new ComponentesSimetricos(r.getAeq());
@@ -393,6 +395,9 @@ return cs3;
 			
 		
 		}else {
+			r = new ReducaoKron(matrizZReal,matrizRr1Real,matrizRf1Real, matrizFr1Real);
+			xl = new ReducaoKron(matrizZImg,matrizRr1Img,matrizRf1Img, matrizFr1Img);
+			
 			r.calcularReducaoKron();
 			xl.calcularReducaoKron();
 		
@@ -473,11 +478,17 @@ return cs3;
 
 	
 	//Reducao de Kron
+	if ((selectNumParaRaio =="ZERO") || (selectTipoParaRaio == "ISOLADO")) {
+		xc = new ReducaoKron();
+		xc.setAeq(matrizYImg);
+		
+	
+	}else {
 	
 	xc = new ReducaoKron(matrizYImg,matrizRr2Img,matrizRf2Img, matrizFr2Img);
 	xc.calcularReducaoKron();
 			
-			
+	}		
 	
 	//calcular inversa usando Apache Commons Math
 	RealMatrix matriz = MatrixUtils.createRealMatrix(xc.getAeq());

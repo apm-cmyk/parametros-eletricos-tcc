@@ -989,6 +989,7 @@ public class NewProjectController implements Initializable {
 		
 	try {
 		
+		
 		resistenciaFase = Double.parseDouble(tfResistenciaFase.getText());
 		resistenciaParaRaio = Double.parseDouble(tfResistenciaParaRaio.getText());
 		resistividadeSolo = Double.parseDouble(tfResistividadeSolo.getText());
@@ -1005,22 +1006,11 @@ public class NewProjectController implements Initializable {
 		faseBx = Double.parseDouble(tfFaseBx.getText());
 		faseCx = Double.parseDouble(tfFaseCx.getText());		
 		
-		distanciaFaseX[0]= faseAx;
-		distanciaFaseX[1]= faseBx;
-		distanciaFaseX[2]= faseCx;
-		
 		faseAy = Double.parseDouble(tfFaseAy.getText());
 		faseBy = Double.parseDouble(tfFaseBy.getText());
 		faseCy = Double.parseDouble(tfFaseCy.getText());
 		
-		System.out.println(faseAy);
-		System.out.println(faseBy);
-		System.out.println(faseCy);
-
 		
-		distanciaFaseY[0]= faseAy;
-		distanciaFaseY[1]= faseBy;
-		distanciaFaseY[2]= faseCy;
 		
 		//Isso aqui já vai obrigar a selecionar (se não cai no catch)
 		selectNumParaRaio = cbNumParaRaio.getValue();
@@ -1029,7 +1019,8 @@ public class NewProjectController implements Initializable {
 		
 		if("UM".equals(selectNumParaRaio)) {numParaRaio=1;}
 		if("DOIS".equals(selectNumParaRaio)) {numParaRaio=2;}
-		
+		if("ZERO".equals(selectNumParaRaio)) {numParaRaio=0;}
+
 		//inicializa os vetores dependentes do numParaRaio
 		distanciaParaRaioX = new double[numParaRaio];
 		distanciaParaRaioY = new double[numParaRaio];
@@ -1043,8 +1034,13 @@ public class NewProjectController implements Initializable {
 		distanciaFaseX2 = new double[numFase];
 		distanciaFaseY2 = new double[numFase];
 
+		distanciaFaseX[0]= faseAx;
+		distanciaFaseX[1]= faseBx;
+		distanciaFaseX[2]= faseCx;
 
-
+		distanciaFaseY[0]= faseAy;
+		distanciaFaseY[1]= faseBy;
+		distanciaFaseY[2]= faseCy;
 		
 		
 		if("UM".equals(selectNumParaRaio)) {
@@ -1194,6 +1190,19 @@ public class NewProjectController implements Initializable {
 		//Selecionar dados da View digitados pelo usuário
 		getDadosView();
 		
+		System.out.println("---botao calcular---");
+		for (int i=0; i<distanciaFaseX.length; i++) {
+			System.out.println(distanciaFaseX[i]);
+
+		}
+		for (int i=0; i<distanciaFaseY.length; i++) {
+			System.out.println(distanciaFaseY[i]);
+
+		}
+	
+		
+
+
 	
 		//Calcular distancias 
 		calculo = new CalculoGeometrico(numFase,numParaRaio, distanciaFaseX,distanciaFaseY,distanciaParaRaioX, 

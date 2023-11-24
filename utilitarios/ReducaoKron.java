@@ -11,6 +11,9 @@ public class ReducaoKron {
 	protected double [][] matrizMult2;
 	protected double[][] matrizSub;
 	
+	public ReducaoKron() {
+		
+	}
 	
 	public ReducaoKron(double [][] Aff, double[][] Arr, double[][] Afr, double[][] Arf) {
 		
@@ -18,6 +21,10 @@ public class ReducaoKron {
 		this.Arr = new double[Arr.length][Arr[0].length];
 		this.Afr = new double[Afr.length][Afr[0].length];
 		this.Arf = new double[Arf.length][Arf[0].length];
+		this.matrizMult1 = new double[Afr.length][Arf[0].length];
+		this.matrizMult2 = new double[Afr.length][Arf[0].length];
+		
+		
 		
 		this.Aff = Aff;
 		this.Arr = Arr;
@@ -26,8 +33,6 @@ public class ReducaoKron {
 		
 		
 		this.Aeq = new double[Aff.length][Aff.length];
-		this.matrizMult1 = new double[Afr.length][Arf[0].length];
-		this.matrizMult2 = new double[Afr.length][Arf[0].length];
 		this.matrizSub = new double[Aff.length][Aff.length];
 				
 	}

@@ -8,8 +8,8 @@ public class CalculoGeometrico extends NewProjectController {
 	//Dados Entrada Usuário
 	int numFase;
 	int numParaRaio;
-	protected double [] distanciaFaseX;
-	protected double [] distanciaFaseY;
+	protected double [] distanciaFaseX = new double[3];
+	protected double [] distanciaFaseY = new double [3];
 	protected double [] distanciaParaRaioX; 
 	protected double [] distanciaParaRaioY;
 	protected double [] distanciaFaseX2;
@@ -96,15 +96,19 @@ public class CalculoGeometrico extends NewProjectController {
 		alturaFases();
 		distanciaFase();
 		alturaParaRaio();
-		distanciaFaseParaRaio();
 		alturaMediaFase();
-		alturaMediaParaRaio();
 		dmgFases();
-		dmgFasesParaRaio();	
 		distanciaFaseImagem(); 
 		dmgFasesImagem(); 
-		distanciaImagemParaRaio();
-		dmgImagemParaRaio();
+		
+		if (numParaRaio ==1 || numParaRaio ==2) {
+			distanciaFaseParaRaio();
+			alturaMediaParaRaio();
+			dmgFasesParaRaio();	
+			distanciaImagemParaRaio();
+			dmgImagemParaRaio();
+			
+		}
 		
 		if (numParaRaio>1 && numFase>3) {
 		dmgImagemParaRaioRS();
@@ -349,6 +353,10 @@ public class CalculoGeometrico extends NewProjectController {
 		
 		//Metodo Testado em 31/08/2023 ok!
 		for (int i=0;i<numFase;i++) {
+		System.out.println("-----Altura Fase----");
+		System.out.println(hFase[i]);
+		System.out.println(distanciaFaseY[i]);
+		System.out.println(flechaFase);
 		hFase[i] = distanciaFaseY[i] -0.7*flechaFase; 
 		
 		}
