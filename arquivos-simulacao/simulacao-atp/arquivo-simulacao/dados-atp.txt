@@ -1,0 +1,8 @@
+Pho:(um numero para cada fase. E zero para o caso fio terra potencial zero (para-raio)
+React[ohm/kmAC]:reatancia independente da frequencia (para o caso que não existe o efeito pelicular)
+Rout[cm]:raio externo no condutor
+Resis[ohm/kmAC]:resitencia DC (com efeito pelicular) ou resistencia cc a frequencia inicial (sem efeito pelicular)
+Horiz[m]:distancia horizontal
+Vtower[m]:altura vertical do feixe na torre
+Vmid[m]:altura vertical do feixe no meio do vão. h = 2/3*Vmid + Vtower (eu acho que é a flecha)
+segment ground:se o botão estiver desmarcado, os fios terra serão considerados segmentados (descontínuos). Isso significa que a corrente é zero nos condutores de aterramento e eles são simplesmente ignorados no cálculo da impedância em série.

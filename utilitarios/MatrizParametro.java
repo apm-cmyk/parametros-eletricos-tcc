@@ -107,6 +107,7 @@ public MatrizParametro(CalculoGeometrico dados, String selectNumCircuito, String
 	parametro3 = new ParametroLongitudinal();
 	
 	this.selectNumCircuito = selectNumCircuito;
+	this.selectNumParaRaio = "UM";
 	this.selectNumParaRaio = selectNumParaRaio;
 	this.selectTipoParaRaio = selectTipoParaRaio;
 	
@@ -156,6 +157,7 @@ public MatrizParametro(CalculoGeometrico dados, String selectNumCircuito, String
 	Aeq3 = new double [dados.getNumFase()][dados.getNumFase()];
 	Aeq = new double [dados.getNumFase()][dados.getNumFase()];
 	
+	dr2 = new double[dados.getNumFase()*dados.getNumFase()];
 	
 	h = dados.gethFase();
 	hm = dados.getHm();
@@ -255,6 +257,7 @@ return cs3;
 
 	public void matrizParametroLongitudinal() {
 		
+		
 		int x = 0;
 		for(int i=0;i<dados.getNumFase();i++) {
 			for(int j=0;j<dados.getNumFase();j++) {
@@ -284,12 +287,13 @@ return cs3;
 				int x1=0;
 				for (int i1=0; i1<dados.getNumFase(); i1++) {
 					for (int j1=0; j1<dados.getNumFase(); j1++) {
-				matrizZ2[i1][j1] = parametro2.calculoLongitudinalMutuo(D2[x1],d2[x1],dados.getDm2(), dados.getDm2());
+				matrizZ2[i1][j1] = parametro2.calculoLongitudinalMutuo(D2[x1],d2[x1],dados.getDmi2(), dados.getDm2());
 				matrizZ[i1][j1] = matrizZ[i1][j1].soma(matrizZ2[i1][j1]);
 				matrizZReal[i1][j1] = matrizZ[i1][j1].getReal();
-				matrizZImg[i1][j1] = matrizZ[i1][j1].getImag();			
+				matrizZImg[i1][j1] = matrizZ[i1][j1].getImag();	
 				x1++;
 				}
+				
 			}
 			
 		}
@@ -331,6 +335,8 @@ return cs3;
 		
 		
 		if (selectNumParaRaio == "UM" && selectNumCircuito =="DUPLO") {
+			System.out.println("um para raio e circuito duplo");
+
 			@SuppressWarnings("unused")
 			int x1=0;
 			for (int i1=0; i1<dados.getNumFase(); i1++) {
@@ -339,23 +345,28 @@ return cs3;
 			matrizRf1[i1][j1] = matrizRf1[i1][j1].soma(matrizRf3[i1][j1]);
 			matrizRf1Real[i1][j1] = matrizRf1[i1][j1].getReal();
 			matrizRf1Img[i1][j1] = matrizRf1[i1][j1].getImag();
+			System.out.println(dr2[i1]);
+			System.out.println(hr[j1]);
+
 			x1++;
 				}
 			}
 		}
 		
 	
-		if (selectNumParaRaio == "DOIS" && selectNumCircuito =="SIMPLES") {
+		if (selectNumParaRaio == "DOIS" && selectNumCircuito =="SIMPLES" && selectTipoParaRaio != "ISOLADO") {
 			
 		for (int i =0; i<dados.getNumParaRaio(); i++) {
 			for (int j = 0; j<dados.getNumParaRaio(); j++) {
 				
 				if (i == j) {
 				matrizRr1[i][j] = parametro3.calculoLongitudinalProprioParaRaio(hr[j], dados.getRmgParaRaio());
-				
+
 				}else {
 				matrizRr1[i][j] = parametro3.calculoLongitudinalMutuoParaRaio(hr[j], dados.getDrs(), dados.getDmrs(), dados.getDrs());
+
 				}
+				System.out.println(matrizRr1[i][j]);
 				
 		for (int i1=0; i1<dados.getNumFase(); i1++) {
 			int i2 = 3;
@@ -372,7 +383,7 @@ return cs3;
 		}
 		
 		
-		if (selectNumParaRaio == "DOIS" && selectNumCircuito =="DUPLO") {
+		if (selectNumParaRaio == "DOIS" && selectNumCircuito =="DUPLO" && selectTipoParaRaio!="ISOLADO") {
 			
 			
 			
@@ -450,7 +461,6 @@ return cs3;
 				}
 		
 	
-	
 	//Para-raio e matriz P inversa
 				
 	int x2 = 0;
@@ -509,3 +519,4 @@ return cs3;
      }
 			
 }}
+

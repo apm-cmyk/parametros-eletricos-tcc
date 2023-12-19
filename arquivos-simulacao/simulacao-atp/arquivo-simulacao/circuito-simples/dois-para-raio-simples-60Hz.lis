@@ -1,0 +1,143 @@
+   ---   16   cards of disk file read into card cache cells  1   onward.
+ Comment card is ignored.      |C   LBUS  LBRNCH   LDATA   LEXCT   LYMAT  LSWTCH
+ 1st card (Lists  1-10).       |    6000   10000  192000     900  420000    120
+ Limit CIDEAL cards =   200    |CARDS        200 { Limit of CIDEAL will be 2 mor
+ Comment card is ignored.      |C LSMOUT  LSIZ12  LSIZ13  LBSTAC  LCTACS  LIMASS
+ 2nd card (Lists 11-20).       |     720    2000   72800     510   90000     80
+ Comment card is ignored.      |C    LFD   LHIST  LSIZ23   NCOMP  LSPCUM  LSIZ26
+ 3rd card (Lists 21-30).       |    3000   15000  192000     120   60000  16000
+ 4th card (Lists 31-32).       |     400     100     { Optional card for Lists
+ Comment card is ignored.      |C  LWORK  LMARTI
+ Supplemental offsets.         |  340000     742
+Alternative Transients Program (ATP),  GNU Linux or DOS.  All rights reserved by Can/Am user group of Portland, Oregon, USA.
+ Date (dd-mth-yy) and time of day (hh.mm.ss) = 02-Dec-23  23:07:11   Name of disk plot file is  \simulacao-atp\circuito-simples.pl4
+Consult the 860-page ATP Rule Book of the Can/Am EMTP User Group in Portland,  Oregon, USA.  Source code date is 16 September 2005.
+Total size of LABCOM tables = 10223690 INTEGER words.  31 VARDIM  List Sizes follow:  6002  10K  192K  900  420K  1200  15K
+  120K  10K  20K  720  2K  72800  510  90K  800  90  254  120K  100K  3K  15K  192K  120  60K  160K  600  210K  300  60  400
+--------------------------------------------------+--------------------------------------------------------------------------------
+Descriptive interpretation of input data cards.   |  Input data card images are shown below, all 80 columns, character by character
+                                                  0         1         2         3         4         5         6         7         8
+                                                  012345678901234567890123456789012345678901234567890123456789012345678901234567890
+--------------------------------------------------+--------------------------------------------------------------------------------
+Comment card.   NUMDCD = 1.                       |C data:C:\USERS\ANAPA\ONEDRIVE\TCC\SIMULACAO-ATP\CIRCUITO-SIMPLES.DAT
+Marker card preceding new EMTP data case.         |BEGIN NEW DATA CASE
+Compute overhead line constants.  Limit = 120     |LINE CONSTANTS
+Erase all of  0   cards in the punch buffer.      |$ERASE
+Pairs of 6-character bus names for each phase.    |BRANCH  IN_001OUT001IN_002OUT002IN_003OUT003
+Request for metric (not English) units.           |METRIC
+Line conductor card.  5.000E-01  7.140E-02     4  |  1   .5   .0714 4           2.642   -10.8    35.8    22.7
+Line conductor card.  5.000E-01  7.140E-02     4  |  2   .5   .0714 4           2.642     0.0    35.8    22.7
+Line conductor card.  5.000E-01  7.140E-02     4  |  3   .5   .0714 4           2.642    10.8    35.8    22.7
+Line conductor card.  5.000E-01  7.140E-02     4  |  0   .5   .0714 4           2.642   -10.8    45.8    18.8
+Line conductor card.  5.000E-01  7.140E-02     4  |  0   .5   .0714 4           2.642    10.8    45.8     19.
+Blank card terminating conductor cards.           |BLANK CARD ENDING CONDUCTOR CARDS
+Frequency card.  1.000E+03  6.000E+01  1.000E+00  |    1.E3       60.           100001 101000 0      1.     1        44
+
+Line conductor table after sorting and initial processing.
+ Table   Phase   Skin effect    Resistance   Reactance data specification     Diameter   Horizontal   Avg height
+   Row  Number        R-type    R (ohm/km)   X-type      X(ohm/km) or GMR     (  cm  )     X (mtrs)     Y (mtrs)        Name
+     1       1        .50000        .07140        4               .000000      2.64200      -10.800       27.067
+     2       2        .50000        .07140        4               .000000      2.64200        0.000       27.067
+     3       3        .50000        .07140        4               .000000      2.64200       10.800       27.067
+     4       0        .50000        .07140        4               .000000      2.64200      -10.800       27.800
+     5       0        .50000        .07140        4               .000000      2.64200       10.800       27.933
+
+Matrices are for earth resistivity = 1.00000000E+03  ohm-meters  and frequency 6.00000000E+01  Hz.   Correction factor =
+1.00000000E-06
+                            ++++++++++++   Earth wires will be segmented   ++++++++++
+
+Inverted susceptance matrix,  in units of  [ohm-kmeter ]  for the system of physical conductors.
+Rows and columns proceed in the same order as the sorted input.
+
+   1  3.966163E+05
+
+   2  7.778668E+04  3.966163E+05
+
+   3  4.732883E+04  7.778668E+04  3.966163E+05
+
+   4  2.057437E+05  7.829435E+04  4.785585E+04  3.978909E+05
+
+   5  4.794519E+04  7.836241E+04  1.978942E+05  4.853075E+04  3.981191E+05
+
+Susceptance matrix,  in units of  [mhos/kmeter ]  for symmetrical components of the equivalent phase conductor
+Rows proceed in the sequence  (0, 1, 2),  (0, 1, 2),  etc.;  columns proceed in the sequence  (0, 2, 1),  (0, 2, 1),  etc.
+
+   0  2.747691E-06
+      0.000000E+00
+
+   1  1.739520E-07  6.512944E-08
+     -2.457421E-07  6.570514E-08
+
+   2  1.739520E-07  3.464074E-06  6.512944E-08
+      2.457421E-07  4.855296E-23 -6.570514E-08
+
+Impedance matrix,  in units of  [ohms/kmeter ]  for the system of physical conductors.
+Rows and columns proceed in the same order as the sorted input.
+
+   1  1.309830E-01
+      9.416200E-01
+
+   2  5.795281E-02  1.309830E-01
+      4.173392E-01  9.416200E-01
+
+   3  5.794786E-02  5.795281E-02  1.309830E-01
+      3.650783E-01  4.173392E-01  9.416200E-01
+
+   4  0.000000E+00  0.000000E+00  0.000000E+00  1.309501E-01
+      0.000000E+00  0.000000E+00  0.000000E+00  9.416553E-01
+
+   5  0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  1.309441E-01
+      0.000000E+00  0.000000E+00  0.000000E+00  0.000000E+00  9.416617E-01
+        Both  "R"  and  "X"  are in  [ohms];   "C"  are in  [microMhos].
+
+Impedance matrix,  in units of  [ohms/kmeter ]  for symmetrical components of the equivalent phase conductor
+Rows proceed in the sequence  (0, 1, 2),  (0, 1, 2),  etc.;  columns proceed in the sequence  (0, 2, 1),  (0, 2, 1),  etc.
+
+   0  2.468853E-01
+      1.741458E+00
+
+   1 -1.508727E-02 -3.017124E-02
+     -8.708735E-03  1.742319E-02
+
+   2  1.508562E-02  7.303184E-02  3.017454E-02
+     -8.711593E-03  5.417011E-01  1.741747E-02
+
+Sequence       Surge impedance       Attenuation   velocity    Wavelength   Resistance    Reactance   Susceptance
+         magnitude(ohm) angle(degr.)    db/km        km/sec        km          ohm/km        ohm/km      mho/km
+   Zero :  8.00079E+02 -4.03451E+00  1.34346E-03  1.71913E+05  2.86521E+03  2.46885E-01  1.74146E+00  2.74769E-06
+Positive:  3.97230E+02 -3.83914E+00  8.00258E-04  2.74585E+05  4.57642E+03  7.30318E-02  5.41701E-01  3.46407E-06
+Request for flushing of punch buffer.             |$PUNCH
+
+A listing of 80-column card images now being flushed from punch buffer follows.
+===============================================================================
+1234567890123456789012345678901234567890123456789012345678901234567890123456789
+===============================================================================
+C  <++++++>  Cards punched by support routine on  02-Dec-23  23:07:11  <++++++>
+C LINE CONSTANTS
+C $ERASE
+C BRANCH  IN_001OUT001IN_002OUT002IN_003OUT003
+C METRIC
+C   1   .5   .0714 4           2.642   -10.8    35.8    22.7
+C   2   .5   .0714 4           2.642     0.0    35.8    22.7
+C   3   .5   .0714 4           2.642    10.8    35.8    22.7
+C   0   .5   .0714 4           2.642   -10.8    45.8    18.8
+C   0   .5   .0714 4           2.642    10.8    45.8     19.
+C BLANK CARD ENDING CONDUCTOR CARDS
+C     1.E3       60.           100001 101000 0      1.     1        44
+$VINTAGE, 1
+$UNITS,  60.,  60.
+ 1IN_001OUT001              1.30983003E-01  9.41619974E-01  3.50063570E+00
+ 2IN_002OUT002              5.79528124E-02  4.17339247E-01 -3.06464537E-01
+                            1.30983003E-01  9.41619974E-01  2.76590891E+00
+ 3IN_003OUT003              5.79478635E-02  3.65078262E-01 -9.85757932E-02
+                            5.79528124E-02  4.17339247E-01 -3.11342705E-01
+                            1.30983003E-01  9.41619974E-01  3.40929569E+00
+$VINTAGE, -1,
+$UNITS, -1., -1., { Restore values that existed b4 preceding $UNITS
+=========<  End of LUNIT7 punched cards as flushed by  $PUNCH  request  >=======
+
+Blank card terminating frequency cards.           |BLANK CARD ENDING FREQUENCY CARDS
+Blank card ending  "LINE CONSTANTS"  cases.       |BLANK CARD ENDING LINE CONSTANT
+Timing figures characterizing central processor (CP) solution speed.  ----------------------------   CP sec  Wait sec  Real sec
+                                                                                          Totals      0.031     0.000     0.031
+

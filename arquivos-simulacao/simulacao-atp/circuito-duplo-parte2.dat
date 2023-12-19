@@ -1,0 +1,20 @@
+BEGIN NEW DATA CASE
+LINE CONSTANTS
+$ERASE
+BRANCH  IN_001OUT001IN_002OUT002IN_003OUT003IN_004OUT004IN_005OUT005IN_006OUT006
+METRIC
+  1   .5   .0796 4           2.669     5.1    29.8     21.
+  2   .5   .0796 4           2.669     5.1    36.8     21.
+  3   .5   .0796 4           2.669     5.1    43.8     21.
+  4   .5   .0796 4           2.669    -5.1    43.8     21.
+  5   .5   .0796 4           2.669    -5.1    36.8     21.
+  6   .5   .0796 4           2.669    -5.1    29.8     21.
+  0   .5   .0796 4           2.669     5.1     51.     21.
+  0   .5   .0796 4           2.669    -5.1     51.     21.
+BLANK CARD ENDING CONDUCTOR CARDS
+    1.E3       60.           000001 001000 0      1.     1        44
+$PUNCH
+BLANK CARD ENDING FREQUENCY CARDS
+BLANK CARD ENDING LINE CONSTANT
+BEGIN NEW DATA CASE
+BLANK CARD

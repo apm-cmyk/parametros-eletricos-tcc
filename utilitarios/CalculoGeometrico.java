@@ -29,6 +29,7 @@ public class CalculoGeometrico extends NewProjectController {
 	
 	//Dados Calculados Pela Classe
 	private	double [] hFase; 
+	private	double [] hFase2; 
 	private double [] distanciaFaseParaRaio; 
 	private double [] distanciaFase2ParaRaio;
 	private double [] distanciaFase; 
@@ -82,17 +83,18 @@ public class CalculoGeometrico extends NewProjectController {
 		CalculoGeometrico.transposicao =transposicao;
 		CalculoGeometrico.efeitoSolo =efeitoSolo;
 		
-		
+		hFase2 = new double[numFase];
 		hFase = new double[numFase];
 		distanciaFaseParaRaio = new double[numFase*numParaRaio];
-		distanciaFase2ParaRaio = new double[numFase];
+		distanciaFase2ParaRaio = new double[numFase*numParaRaio];
 		distanciaFase = new double[numFase*(numFase-1)];
 		hParaRaio = new double[numParaRaio];
 		distanciaFaseImagem = new double[numFase*(numFase-1)];
 		distanciaFaseImagemParaRaio = new double[numFase*numParaRaio];
-		distanciaImagem2ParaRaio = new double[numFase];
+		distanciaImagem2ParaRaio = new double[numFase*numParaRaio];
 		distanciaFase1Imagem2 = new double[numFase*numFase]; 
 		distanciaFase1Fase2 = new double[numFase*numFase];
+		distanciaImagemParaRaioRS = new double[numParaRaio];
 		alturaFases();
 		distanciaFase();
 		alturaParaRaio();
@@ -110,17 +112,21 @@ public class CalculoGeometrico extends NewProjectController {
 			
 		}
 		
-		if (numParaRaio>1 && numFase>3) {
-		dmgImagemParaRaioRS();
-		}
-		
 		if (numParaRaio>1) {
-		
 		distanciaParaRaioRS();
-		
+		distanciaImagemParaRaioRS();
+		dmgImagemParaRaioRS();
+	
 		}
 		
-		if (numFase>3) {
+		
+		
+		//tem fazer isso aqui se for circuito duplo
+		if (distanciaFaseX2 != null) {
+			alturaFases2();
+			
+			if (numParaRaio>1)
+			System.out.println("entrou aqui");
 			distanciaFase2ParaRaio();	
 			distanciaImagem2ParaRaio();
 			distanciaFase1Imagem2() ;
@@ -237,7 +243,9 @@ public class CalculoGeometrico extends NewProjectController {
 	public double[] gethFase() {
 		return hFase;
 	}
-
+	public double[] gethFase2() {
+		return hFase2;
+	}
 
 
 	public double[] getDistanciaFaseParaRaio() {
@@ -353,11 +361,17 @@ public class CalculoGeometrico extends NewProjectController {
 		
 		//Metodo Testado em 31/08/2023 ok!
 		for (int i=0;i<numFase;i++) {
-		System.out.println("-----Altura Fase----");
-		System.out.println(hFase[i]);
-		System.out.println(distanciaFaseY[i]);
-		System.out.println(flechaFase);
 		hFase[i] = distanciaFaseY[i] -0.7*flechaFase; 
+		
+		}
+		
+	}
+	
+	public void alturaFases2() {	
+		
+		//Metodo Testado em 31/08/2023 ok!
+		for (int i=0;i<numFase;i++) {
+		hFase2[i] = distanciaFaseY2[i] -0.7*flechaFase; 
 		
 		}
 		
@@ -467,6 +481,7 @@ public class CalculoGeometrico extends NewProjectController {
 			for (int j=0; j<distanciaFaseX.length; j++) {
 				
 				distanciaFase1Imagem2[x] = Math.sqrt(Math.pow(distanciaFaseX[i]-distanciaFaseX2[j], 2)+Math.pow(distanciaFaseY[i]+distanciaFaseY2[j], 2));
+				System.out.println(distanciaFase1Imagem2[x]);
 				x++;
 				
 			}
@@ -503,8 +518,13 @@ public class CalculoGeometrico extends NewProjectController {
 
 		for (int i=0; i<numParaRaio;i++) {	
 		distanciaImagemParaRaioRS[i] = Math.sqrt(Math.pow(distanciaParaRaioX[i]-distanciaParaRaioX[j], 2)+Math.pow(distanciaParaRaioY[i]+distanciaParaRaioY[j], 2));
+		System.out.println("distanciaImagemParaRaioRS");
+
+		System.out.println(distanciaImagemParaRaioRS[i]);
 		j=0;
 		}
+		System.out.println("fim");
+
 		
 	}
 	

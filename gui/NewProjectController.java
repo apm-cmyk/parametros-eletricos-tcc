@@ -299,7 +299,7 @@ public class NewProjectController implements Initializable {
 	ComponentesSimetricos m2 = matriz.getCs2();
 	Complexo[][] valor2 = m2.getMatrizSimetrica();
 	
-	//elementos Xc seq
+	//elementos C seq
 	ComponentesSimetricos m3 = matriz.getCs3();
 	Complexo[][] valor3 = m3.getMatrizSimetrica();
 		
@@ -1031,9 +1031,7 @@ public class NewProjectController implements Initializable {
 		
 		distanciaFaseX = new double[numFase];
 		distanciaFaseY = new double[numFase];
-		distanciaFaseX2 = new double[numFase];
-		distanciaFaseY2 = new double[numFase];
-
+		
 		distanciaFaseX[0]= faseAx;
 		distanciaFaseX[1]= faseBx;
 		distanciaFaseX[2]= faseCx;
@@ -1065,6 +1063,9 @@ public class NewProjectController implements Initializable {
 		
 		
 		if("DUPLO".equals(selectNumCircuito)) {
+			distanciaFaseX2 = new double[numFase];
+			distanciaFaseY2 = new double[numFase];
+
 			faseDx = Double.parseDouble(tfFaseDx.getText());
 			faseEx = Double.parseDouble(tfFaseEx.getText());
 			faseFx = Double.parseDouble(tfFaseFx.getText());		
@@ -1190,15 +1191,7 @@ public class NewProjectController implements Initializable {
 		//Selecionar dados da View digitados pelo usuário
 		getDadosView();
 		
-		System.out.println("---botao calcular---");
-		for (int i=0; i<distanciaFaseX.length; i++) {
-			System.out.println(distanciaFaseX[i]);
-
-		}
-		for (int i=0; i<distanciaFaseY.length; i++) {
-			System.out.println(distanciaFaseY[i]);
-
-		}
+		
 	
 		
 

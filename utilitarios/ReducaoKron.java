@@ -1,5 +1,9 @@
 package utilitarios;
 
+import org.apache.commons.math4.legacy.linear.LUDecomposition;
+import org.apache.commons.math4.legacy.linear.MatrixUtils;
+import org.apache.commons.math4.legacy.linear.RealMatrix;
+
 public class ReducaoKron {
 	
 	protected double [][] Aff;
@@ -69,7 +73,8 @@ public class ReducaoKron {
 				
 			}
 		}
-			
+		
+		
 		for (i=0;i<Arr.length;i++) {
 			
 			pivote = Arr[i][i];
@@ -90,6 +95,16 @@ public class ReducaoKron {
 			}
 		}
 		
+	
+		/*
+		RealMatrix matriz = MatrixUtils.createRealMatrix(Arr);
+		
+	
+	    // Calcule a matriz inversa
+	    RealMatrix matrizInversa = new LUDecomposition(matriz).getSolver().getInverse(); 
+	    double[][] matrizI = matrizInversa.getData();
+	     */  
+	    
 		
 		
 		//Afr vezez Arr inversa
